@@ -1,10 +1,15 @@
 package com.fobsolutions.security.controllers;
 
+import com.fobsolutions.security.service.DonationService;
+import com.fobsolutions.security.service.LoginService;
+import com.fobsolutions.security.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by FOB Solutions
@@ -13,75 +18,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
+    @Autowired
+    private PostService postService;
+
+    @Autowired
+    private LoginService loginService;
+
+    @Autowired
+    private DonationService donationService;
+
+    @Autowired
+    private PostController postController;
+
     @RequestMapping("/")
-    public String landingPage() {
+    public String landingPage(Model model, HttpServletRequest request) {
+        model.addAttribute("isLoggedIn", loginService.isLoggedIn(request.getCookies()));
         return "index";
     }
 
-    @RequestMapping("/blog")
-    public String blogMainPage() {
-        return "blog/index";
-    }
+    @RequestMapping("/reset")
+    public String reset(Model model, HttpServletRequest request, HttpServletResponse response) {
+        loginService.reset();
+        donationService.reset();
+        postService.reset();
+        loginService.logout(request.getCookies(), response);
 
-    @GetMapping("/post")
-    public String blogPost(
-            @RequestParam(value = "id", required = true) int id
-    ) {
-        return "blog/post";
-    }
+        loginService.addAdminUser();
+        postService.addFirstPost();
 
-    @PostMapping("/post")
-    public String newPostPage(
-            @RequestParam(value = "title", required = true) String name,
-            @RequestParam(value = "subtitle", required = false, defaultValue = "") String subtitle,
-            @RequestParam(value = "postContent", required = true) String content
-    ) {
-        return blogMainPage();
-    }
-
-    @RequestMapping("/new")
-    public String newPost() {
-        return "blog/new";
-    }
-
-    @GetMapping("/login")
-    public String loginpage() {
-        return "blog/login";
-    }
-
-    @PostMapping("/login")
-    public String login(
-            @RequestParam(value = "username", required = true) String username,
-            @RequestParam(value = "password", required = true) String password
-    ) {
-        return "blog/index";
-    }
-
-    @RequestMapping("/donate")
-    public String donatePage() {
-        return "blog/donate";
+        return postController.blogMainPage(model, request);
     }
 
 
-    @PostMapping("/donate")
-    public String addDonation(
-            @RequestParam(value = "name", required = false, defaultValue = "Anonymous") String name,
-            @RequestParam(value = "amount", required = true) int amount
-    ) {
-        return "blog/index";
-    }
-
-    @RequestMapping("/comment")
-    public String commentPage() {
-        return "blog/comment";
-    }
-
-
-    @PostMapping("/comment")
-    public String addComment(
-            @RequestParam(value = "name", required = true) String name,
-            @RequestParam(value = "comment", required = true) String comment
-    ) {
-        return "blog/index";
-    }
 }

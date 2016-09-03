@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -54,8 +54,9 @@
                 <li>
                     <a href="blog">Home</a>
                 </li>
-                <li>
-                    <a href="login">Login</a>
+                <li th:switch="${isLoggedIn}">
+                    <a href="login" th:case="${false}">Login</a>
+                    <a href="logout" th:case="${true}">Logout</a>
                 </li>
                 <li>
                     <a href="donate">Donate</a>
@@ -85,28 +86,25 @@
 
 <!-- Main Content -->
 <div class="container">
-    <div class="row">
+    <div th:each="post : ${posts}" class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-preview">
-                <a href="post">
-                    <h2 class="post-title">
-                        Man must explore, and this is exploration at its greatest
-                    </h2>
-                    <h3 class="post-subtitle">
-                        Problems look mighty small from 150 miles up
-                    </h3>
+                <a th:href="@{'post?id=' + ${post.id}}">
+                    <h2 th:text="${post.title}" class="post-title"></h2>
+                    <h3 th:text="${post.subtitle}" class="post-subtitle"></h3>
                 </a>
-                <p class="post-meta">Posted by <a href="#">FOB Solutions</a> on September 2, 2016</p>
+                <p class="post-meta">Posted by <a th:text="${post.user.username}"></a></p>
             </div>
             <hr/>
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="next">
-                    <a href="new">Add post &rarr;</a>
-                </li>
-            </ul>
         </div>
     </div>
+    <hr/>
+    <!-- Pager -->
+    <ul class="pager">
+        <li class="next">
+            <a href="new">Add post &rarr;</a>
+        </li>
+    </ul>
 </div>
 
 <hr/>

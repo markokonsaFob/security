@@ -75,7 +75,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="page-heading">
-                    <h1>Please send me money</h1>
+                    <h1>Accept your donation</h1>
                 </div>
             </div>
         </div>
@@ -86,34 +86,30 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <p>Choose whatever amout you will like to send, everything helps!</p>
-            <form th:action="@{/donate}" name="sendMoney" id="donateForm" novalidate="novalidate" method="POST">
-                <div class="row control-group">
-                    <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <label>Who's sending</label>
-                        <input type="text" class="form-control" placeholder="Name" name="name" required="required"
-                               data-validation-required-message="Please enter your name."/>
-                        <p class="help-block text-danger"></p>
-                    </div>
-                </div>
-                <div class="row control-group">
-                    <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <label>Amount</label>
-                        <input type="number" class="form-control" placeholder="Amount" name="VK_AMOUNT"
-                               required="required"
-                               data-validation-required-message="Please enter amount."/>
-                        <p class="help-block text-danger"></p>
-                    </div>
-                </div>
-                <br/>
-                <div id="success"></div>
-                <div class="row">
-                    <div class="form-group col-xs-12">
-                        <button type="submit" class="btn btn-default">Send</button>
-                    </div>
-                </div>
-            </form>
+            <p th:text="${name}"></p>
+            <p th:text="${amount}"></p>
         </div>
+    </div>
+    <div class="row">
+        <!-- Pager -->
+        <ul class="pager">
+            <form th:action="@{donate}" method="POST">
+                <input hidden="hidden" name="name" th:value="${name}"/>
+                <input hidden="hidden" name="amount" th:value="${amount}"/>
+                <input hidden="hidden" name="success" value="true"/>
+                <li class="next">
+                    <button class="btn btn-default" type="submit">Accept</button>
+                </li>
+            </form>
+            <form th:action="@{donate}" method="POST">
+                <input hidden="hidden" name="name" th:value="${name}"/>
+                <input hidden="hidden" name="amount" th:value="${amount}"/>
+                <input hidden="hidden" name="success" value="false"/>
+                <li class="previous">
+                    <button class="btn btn-default" type="submit">Decline</button>
+                </li>
+            </form>
+        </ul>
     </div>
 </div>
 

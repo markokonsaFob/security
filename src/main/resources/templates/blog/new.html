@@ -54,8 +54,9 @@
                 <li>
                     <a href="blog">Home</a>
                 </li>
-                <li>
-                    <a href="login">Login</a>
+                <li th:switch="${isLoggedIn}">
+                    <a href="login" th:case="${false}">Login</a>
+                    <a href="logout" th:case="${true}">Logout</a>
                 </li>
                 <li>
                     <a href="donate">Donate</a>

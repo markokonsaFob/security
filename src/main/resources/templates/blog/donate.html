@@ -54,8 +54,9 @@
                 <li>
                     <a href="blog">Home</a>
                 </li>
-                <li>
-                    <a href="login">Login</a>
+                <li th:switch="${isLoggedIn}">
+                    <a href="login" th:case="${false}">Login</a>
+                    <a href="logout" th:case="${true}">Logout</a>
                 </li>
                 <li>
                     <a href="donate">Donate</a>
@@ -86,7 +87,7 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <p>Choose whatever amout you will like to send, everything helps!</p>
-            <form th:action="@{/comment}" name="sendMoney" id="donateForm" novalidate="novalidate" method="POST">
+            <form th:action="@{check}" name="sendMoney" id="donateForm" novalidate="novalidate" method="POST">
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                         <label>Who's sending</label>
@@ -98,7 +99,8 @@
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                         <label>Amount</label>
-                        <input type="number" class="form-control" placeholder="Amount" name="amount" required="required"
+                        <input type="number" class="form-control" placeholder="Amount" name="amount"
+                               required="required"
                                data-validation-required-message="Please enter amount."/>
                         <p class="help-block text-danger"></p>
                     </div>

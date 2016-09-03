@@ -1,7 +1,13 @@
 package com.fobsolutions.security.dao;
 
+import com.fobsolutions.security.models.Post;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 /**
- * Created by marko on 03/09/16.
+ * Created by FOB Solutions
  */
-public class PostRepository {
+public interface PostRepository extends MongoRepository<Post, String> {
+
+    public Post findById(String id);
+
 }
