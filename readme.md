@@ -12,8 +12,7 @@ We hope to get some attention and develop more security related applications (mo
 In the first project you will find:
 - Session management flaws
 - Malicious input flaws
-- Business logic flaws
-- ... and possibily more that we didn't plan to keep
+- ... and possibly more that we didn't plan to keep
 
 ### What do I need to know before starting?
 In order to participate in this project you need to set up a couple of things:
