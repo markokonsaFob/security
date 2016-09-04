@@ -96,7 +96,7 @@
             <br/>
             <hr/>
         </div>
-        <div class="row">
+        <div th:if="${isLoggedIn}" class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <p>Enter comment</p>
                 <form th:action="@{/comment}" name="commentForm" id="commentForm" novalidate="novalidate"
@@ -105,7 +105,7 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Title</label>
-                            <input th:value="${post.user.username}" type="text" class="form-control"
+                            <input th:value="${currentUser.username}" type="text" class="form-control"
                                    placeholder="Author" name="name"
                                    readonly="true"/>
                             <p class="help-block text-danger"></p>

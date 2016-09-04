@@ -40,3 +40,13 @@ mongo {
     port '27017'
     logging 'console'
 }
+
+task(security, dependsOn: 'classes', type: JavaExec) {
+    doFirst {
+        tasks.startMongoDb.execute()
+    }
+
+    main = 'com.fobsolutions.security.Application'
+    classpath = sourceSets.main.runtimeClasspath
+    args 'security'
+}

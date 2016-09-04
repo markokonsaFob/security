@@ -61,9 +61,14 @@ public class DonateController {
             Model model,
             HttpServletRequest request
     ) {
-        model.addAttribute("isLoggedIn", loginService.isLoggedIn(request.getCookies()));
-        model.addAttribute("name", name);
-        model.addAttribute("amount", amount);
-        return "blog/check";
+        if (!amount.isEmpty()) {
+            model.addAttribute("isLoggedIn", loginService.isLoggedIn(request.getCookies()));
+            model.addAttribute("name", name);
+            model.addAttribute("amount", amount);
+            return "blog/check";
+        } else {
+            model.addAttribute("error", "Please enter valid amount");
+            return "blog/donate";
+        }
     }
 }

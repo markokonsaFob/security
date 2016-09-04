@@ -79,4 +79,17 @@ public class LoginService {
 
         return isLoggedIn;
     }
+
+    public User getUserFromCookie(Cookie[] cookies) {
+        try {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userId")) {
+                    return repository.findById(cookie.getValue());
+                }
+            }
+        } catch (Exception ignored) {
+        }
+
+        return null;
+    }
 }

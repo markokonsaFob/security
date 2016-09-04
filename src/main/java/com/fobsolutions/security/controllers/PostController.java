@@ -83,7 +83,11 @@ public class PostController {
             HttpServletRequest request
     ) {
         Post post = service.getPost(postId);
-        model.addAttribute("isLoggedIn", loginService.isLoggedIn(request.getCookies()));
+        boolean isLoggedIn = loginService.isLoggedIn(request.getCookies());
+        model.addAttribute("isLoggedIn", isLoggedIn);
+        if (isLoggedIn) {
+            model.addAttribute("currentUser", loginService.getUserFromCookie(request.getCookies()));
+        }
 
         if (post != null) {
             model.addAttribute("post", post);

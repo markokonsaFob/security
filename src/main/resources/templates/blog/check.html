@@ -92,24 +92,19 @@
     </div>
     <div class="row">
         <!-- Pager -->
-        <ul class="pager">
-            <form th:action="@{donate}" method="POST">
-                <input hidden="hidden" name="name" th:value="${name}"/>
-                <input hidden="hidden" name="amount" th:value="${amount}"/>
-                <input hidden="hidden" name="success" value="true"/>
+        <form th:action="@{donate}" method="POST">
+            <input hidden="hidden" name="name" th:value="${name}"/>
+            <input hidden="hidden" name="amount" th:value="${amount}"/>
+            <input hidden="hidden" name="success" value="true"/>
+            <ul class="pager">
                 <li class="next">
-                    <button class="btn btn-default" type="submit">Accept</button>
+                    <a onclick="$(this).closest('form').submit()">Accept</a>
                 </li>
-            </form>
-            <form th:action="@{donate}" method="POST">
-                <input hidden="hidden" name="name" th:value="${name}"/>
-                <input hidden="hidden" name="amount" th:value="${amount}"/>
-                <input hidden="hidden" name="success" value="false"/>
                 <li class="previous">
-                    <button class="btn btn-default" type="submit">Decline</button>
+                    <a th:href="@{donate}" type="submit">Decline</a>
                 </li>
-            </form>
-        </ul>
+            </ul>
+        </form>
     </div>
 </div>
 
