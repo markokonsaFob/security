@@ -19,4 +19,6 @@ In order to participate in this project you need to set up a couple of things:
 - Download IntelliJ IDEA Community edition from: https://www.jetbrains.com/idea/download
 - Install Gradle plugin to IntelliJ IDEA (from settings)
 - Import project from GitHub
-- Run task with command gradlew security (./gradlew)
+- Open project with IntelliJ
+- Choose "Terminal" from bottom of the page
+- Run task with command gradlew security on terminal view (./gradlew)
