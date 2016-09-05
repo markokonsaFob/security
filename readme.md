@@ -6,7 +6,7 @@ This project is created to give you some examples of the security flaws of a web
 Nowadays clients are more and more in the mind that manual testers should have some experience in security testing. We are trying to spread the word and find new security enthusiasts
 
 ### What can be done with this?
-Right now we have created application which will teach you the basics about three points.
+Right now we have created application which will teach you the basics about two points.
 We hope to get some attention and develop more security related applications (mobile applications as well in the future)
 
 In the first project you will find:
